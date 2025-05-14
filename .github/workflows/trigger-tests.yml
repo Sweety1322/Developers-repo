@@ -1,0 +1,18 @@
+name: Trigger Tests in Testers Repo
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  trigger-tests:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Send repository_dispatch to testers-repo
+        uses: peter-evans/repository-dispatch@v2
+        with:
+          token: ${{ secrets.TESTERS_REPO_TOKEN }}
+          repository: Sweety1322/Testers-repo
+          event-type: run-tests
+
